@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Subtract</title>
+{% endblock title %}
+
+{% block content %}
+<center>
+<br>
+{% if my_answer %}
+<div class="alert alert-{{color}} alert-dismissible fade show" role="alert">
+{{my_answer}}  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{% endif %}
+<div class="jumbotron">
+<h1>{{num_1}}  -  {{num_2}}</h1>
+</div>
+<br>
+<form action='{% url 'subtract' %}' method="POST">
+{% csrf_token %}
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Type your answer" name="answer" >
+    <input type="hidden"  name="old_num_1" value="{{num_1}}">
+    <input type="hidden"  name="old_num_2" value="{{num_2}}" >
+  
+  </div>
+
+  <button type="submit" class="btn btn-outline-secondary btn-sm">Submit</button>
+</form>
+
+</center>
+{% endblock content %}
